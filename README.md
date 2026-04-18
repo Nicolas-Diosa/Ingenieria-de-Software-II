@@ -122,13 +122,19 @@ PARTE GRAPHQL:
 <img width="960" height="585" alt="image" src="https://github.com/user-attachments/assets/598e604a-531a-468f-9cfd-59ad7aad3763" />
 
  → ¿Qué diferencia encontraste vs REST?
+ 
 La estructura de las peticiones se vuelve muy diferentes, se manejan casi como directorios, y también es posible anidar queries, cosa que en REST no parece tan fácil, evidente o posible de hacer.
 
 → ¿Cuántos requests REST necesitarías para reemplazar tu query más compleja?
-En mis queries la más compleja de las estructuras es la de ConsultaAnidada, creo que necesitaría alrededor de 3 peticiones que luego extrapolaría para hallar el mismo resultado.
-Encontrar a colombia por su moneda
 
-Encontrar el continente en el que está Colombia
-Traer a todos los países del continente.
+En mis queries la más compleja de las estructuras es la de ConsultaAnidada, creo que necesitaría alrededor de 3 peticiones que luego extrapolaría para hallar el mismo resultado.
+
+-Encontrar a colombia por su moneda
+
+-Encontrar el continente en el que está Colombia
+
+-Traer a todos los países del continente.
+
 → ¿En qué proyecto real usarías GraphQL?
+
 En proyectos que necesitaran traer información muy puntual del servidor, para evitar consultar información innecesaria o evitar traer menos información de la que necesite, además en proyectos en los que se necesiten usar API’s con un límite de request, sería más viable utilizar Graphql que REST.
