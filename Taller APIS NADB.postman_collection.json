@@ -1,0 +1,132 @@
+{
+  "info": {
+    "_postman_id": "4051aac6-c5b6-4a7d-a1b1-18f0ce273e94",
+    "name": "Taller APIS NADB",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52769697",
+    "_collection_link": "https://go.postman.co/collection/52769697-4051aac6-c5b6-4a7d-a1b1-18f0ce273e94?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "TodosChistes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}{{chistes}}/any?amount=1368",
+          "host": [
+            "{{base_url}}{{chistes}}"
+          ],
+          "path": [
+            "any"
+          ],
+          "query": [
+            {
+              "key": "amount",
+              "value": "1368"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "EndPoints",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/endpoints",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "endpoints"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "PrimerChiste",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"El ID devuelto es el correcto (ID = 0)\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "\r",
+              "    pm.expect(jsonData.id).to.eql(0);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}{{chistes}}/any?idRange={{filtroChiste}}",
+          "host": [
+            "{{base_url}}{{chistes}}"
+          ],
+          "path": [
+            "any"
+          ],
+          "query": [
+            {
+              "key": "idRange",
+              "value": "{{filtroChiste}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "NuevoChiste",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"formatVersion\": 3,\r\n    \"category\": \"Programming\",\r\n    \"type\": \"single\",\r\n    \"joke\": \"There are 10 kind of people, who knows binary and who don't\",\r\n    \"flags\": {\r\n        \"nsfw\": false,\r\n        \"religious\": false,\r\n        \"political\": true,\r\n        \"racist\": false,\r\n        \"sexist\": false,\r\n        \"explicit\": false\r\n    },\r\n    \"lang\": \"en\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/submit",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "submit"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

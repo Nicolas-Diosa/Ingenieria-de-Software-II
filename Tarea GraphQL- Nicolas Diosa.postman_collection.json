@@ -1,0 +1,230 @@
+{
+  "info": {
+    "_postman_id": "9ca76fa2-ea1d-4d6e-81bf-1edeec8c6fee",
+    "name": "Tarea GraphQL- Nicolas Diosa",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52769697",
+    "_collection_link": "https://go.postman.co/collection/52769697-9ca76fa2-ea1d-4d6e-81bf-1edeec8c6fee?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "FiltrarCOP",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Bogotá es la capital de colombia\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    \r",
+              "    pm.expect(jsonData.data.countries[0].capital).to.eql(\"Bogotá\");\r",
+              "});\r",
+              "pm.test(\"El  nomre del país es colombia\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    \r",
+              "    pm.expect(jsonData.data.countries[0].name).to.eql(\"Colombia\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\r\n  countries(filter: { currency: { eq: \"COP\" } }) {\r\n    name\r\n    capital\r\n  }\r\n}\r\n",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "{{base_URL}}",
+          "host": [
+            "{{base_URL}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ConsultaAnidada",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"El primer país de la lista es Colombia\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    \r",
+              "    pm.expect(jsonData.data.countries[0].name).to.eql(\"Colombia\");\r",
+              "});\r",
+              "pm.test(\"Verificar que Argentina está en la lista de países\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    \r",
+              "    var nombresPaises = jsonData.data.countries[0].continent.countries.map(p => p.name);\r",
+              "    \r",
+              "    pm.expect(nombresPaises).to.include(\"Argentina\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\r\n  countries(filter: { currency: { eq: \"COP\" } }) {\r\n    name\r\n    capital\r\n    continent{\r\n      countries{\r\n        name\r\n        currency\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "{{base_URL}}",
+          "host": [
+            "{{base_URL}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Idiomas",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"El español está dentro de los idiomas\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    var nombresIdiomas = jsonData.data.languages.map(p => p.name);\r",
+              "    \r",
+              "   pm.expect(nombresIdiomas).to.include(\"Spanish\");\r",
+              "});\r",
+              "pm.test(\"El inglés está dentro de los idiomas\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    var nombresIdiomas = jsonData.data.languages.map(p => p.name);\r",
+              "    \r",
+              "    pm.expect(nombresIdiomas).to.include(\"English\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\r\n  languages{\r\n    name\r\n  }\r\n}\r\n",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "{{base_URL}}",
+          "host": [
+            "{{base_URL}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ChinaEstados",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"El estado  está dentro de china\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    var nombresEstados = jsonData.data.country.states.map(p => p.name);\r",
+              "    \r",
+              "   pm.expect(nombresEstados).to.include(\"重庆\");\r",
+              "});\r",
+              "pm.test(\"El estado  está dentro de china\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    var nombresEstados = jsonData.data.country.states.map(p => p.name);\r",
+              "    \r",
+              "    pm.expect(nombresEstados).to.include(\"黑龙江\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\r\n  country(code:\"CN\"){\r\n    name\r\n    states{\r\n      name\r\n    }\r\n  }\r\n}\r\n",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "{{base_URL}}",
+          "host": [
+            "{{base_URL}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "MonedasContinentes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"El continente Antártida tiene un país con moneda NOK\", function () {\r",
+              "    pm.expect(pm.response.json().data.continents[1].countries[1].currency).to.eql(\"NOK\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"El continente Sudamerica tiene un país con moneda COP\", function () {\r",
+              "    monedas = pm.response.json().data.continents[6].countries.map(p => p.currency);\r",
+              "    pm.expect(monedas).to.include(\"COP\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query {\r\n  continents{\r\n    name\r\n    countries{\r\n      currency\r\n    }\r\n  }\r\n}\r\n",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "{{base_URL}}",
+          "host": [
+            "{{base_URL}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
